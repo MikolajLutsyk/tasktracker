@@ -9,6 +9,7 @@ import com.devohost.tasktracker.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService{
@@ -30,21 +31,27 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public TaskDTO getTaskById(int id) throws TaskException {
-        return null;
+        return toDTO(taskRepository.getOne(id));
     }
 
     @Override
     public List<TaskDTO> getAllTasks() {
-        return null;
+        return taskRepository.findAll().stream()
+                .map(TaskServiceImpl::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
     public void saveTask(TaskDTO dto) {
-
+        taskRepository.save(toTask(dto));
     }
 
     @Override
     public boolean deleteTask(int id) {
+        if (taskRepository.getOne(id) != null){
+            taskRepository.delete(taskRepository.getOne(id));
+            return true;
+        }
         return false;
     }
 
