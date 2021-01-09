@@ -1,0 +1,8 @@
+package com.devohost.tasktracker.repositories;
+
+import com.devohost.tasktracker.entities.Project;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProjectRepository extends JpaRepository<Project, Integer> {
+
+}
