@@ -20,7 +20,7 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public TaskDTO addTask(TaskDTO dto) {
         if (dto == null){
-            throw new TaskException("income object is null");
+            throw new TaskException("income task object is null");
         }
         dto.setState(State.NEW);
         dto.setPoints(0);
@@ -37,7 +37,7 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public List<TaskDTO> getAllTasks() {
         return taskRepository.findAll().stream()
-                .map(TaskServiceImpl::toDTO)
+                .map(x -> toDTO(x))
                 .collect(Collectors.toList());
     }
 

@@ -1,31 +1,25 @@
-package com.devohost.tasktracker.entities;
+package com.devohost.tasktracker.dto;
 
+import com.devohost.tasktracker.entities.Task;
 import com.devohost.tasktracker.entities.enums.State;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "modules")
 @Data
 @AllArgsConstructor
 @Builder
-public class Module {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ModuleDTO {
     private int id;
-    @Enumerated(EnumType.STRING)
     private State state;
-    @OneToMany(cascade = CascadeType.ALL)
     private List<Task> moduleTasks;
 
     public void addTask(Task task){
         moduleTasks.add(task);
     }
-
-    public Module(){
+    public ModuleDTO(){
         moduleTasks = new ArrayList<>();
     }
 }
