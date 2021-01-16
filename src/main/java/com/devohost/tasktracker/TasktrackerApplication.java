@@ -19,35 +19,35 @@ public class TasktrackerApplication {
     }
 
 
-    @Bean
-    CommandLineRunner init(UserRepository userRepository, TrackerRepository trackerRepository, ProjectRepository projectRepository,
-                           ProjectPhaseRepository phaseRepository, ModuleRepository moduleRepository, TaskRepository taskRepository){
-        return args -> {
-            User user = new User("adminemail2", "password");
-            user.setRole(UserRole.USER);
-            user.setRegistrationDate(LocalDate.now());
-            userRepository.save(user);
-            Tracker tracker = new Tracker();
-            user.setTracker(tracker);
-            trackerRepository.save(tracker);
-            userRepository.save(user);
-            Project project = new Project();
-            tracker.addProject(project);
-            projectRepository.save(project);
-            trackerRepository.save(tracker);
-            ProjectPhase projectPhase = new ProjectPhase();
-            project.addPhase(projectPhase);
-            project.addUser(user, UserRole.ADMIN);
-            phaseRepository.save(projectPhase);
-            projectRepository.save(project);
-            Module module = new Module();
-            projectPhase.addModule(module);
-            moduleRepository.save(module);
-            phaseRepository.save(projectPhase);
-            Task task = new Task();
-            module.addTask(task);
-            taskRepository.save(task);
-            moduleRepository.save(module);
-        };
-    }
+//    @Bean
+//    CommandLineRunner init(UserRepository userRepository, TrackerRepository trackerRepository, ProjectRepository projectRepository,
+//                           ProjectPhaseRepository phaseRepository, ModuleRepository moduleRepository, TaskRepository taskRepository){
+//        return args -> {
+//            User user = new User("adminemail2", "password");
+//            user.setRole(UserRole.USER);
+//            user.setRegistrationDate(LocalDate.now());
+//            userRepository.save(user);
+//            Tracker tracker = new Tracker();
+//            user.setTracker(tracker);
+//            trackerRepository.save(tracker);
+//            userRepository.save(user);
+//            Project project = new Project();
+//            tracker.addProject(project);
+//            projectRepository.save(project);
+//            trackerRepository.save(tracker);
+//            ProjectPhase projectPhase = new ProjectPhase();
+//            project.addPhase(projectPhase);
+//            project.addUser(user, UserRole.ADMIN);
+//            phaseRepository.save(projectPhase);
+//            projectRepository.save(project);
+//            Module module = new Module();
+//            projectPhase.addModule(module);
+//            moduleRepository.save(module);
+//            phaseRepository.save(projectPhase);
+//            Task task = new Task();
+//            module.addTask(task);
+//            taskRepository.save(task);
+//            moduleRepository.save(module);
+//        };
+//    }
 }

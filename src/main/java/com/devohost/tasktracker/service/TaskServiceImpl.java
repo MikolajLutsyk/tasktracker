@@ -1,5 +1,6 @@
 package com.devohost.tasktracker.service;
 
+import com.devohost.tasktracker.dto.BusinessMapper;
 import com.devohost.tasktracker.dto.TaskDTO;
 import com.devohost.tasktracker.entities.Task;
 import com.devohost.tasktracker.entities.enums.State;
@@ -16,65 +17,43 @@ public class TaskServiceImpl implements TaskService{
 
     @Resource
     private TaskRepository taskRepository;
+    @Resource
+    private BusinessMapper mapper;
 
     @Override
     public TaskDTO addTask(TaskDTO dto) {
         if (dto == null){
             throw new TaskException("income task object is null");
         }
-        dto.setState(State.NEW);
-        dto.setPoints(0);
-        dto.setPriority(TaskPriority.NOTURGENT_NOTIMPORTANT);
-        Task task =  taskRepository.save(toTask(dto));
-        return toDTO(task);
+        dto.setState(State.NEW.toString());
+        dto.setPriority(TaskPriority.NOTURGENT_NOTIMPORTANT.toString());
+        Task task =  taskRepository.save(mapper.toTask(dto));
+        return mapper.toDTO(task);
     }
 
     @Override
     public TaskDTO getTaskById(int id) throws TaskException {
-        return toDTO(taskRepository.getOne(id));
+        return mapper.toDTO( taskRepository.findById(id).orElseThrow(()->new TaskException("Problem with task searching")));
     }
 
     @Override
     public List<TaskDTO> getAllTasks() {
         return taskRepository.findAll().stream()
-                .map(x -> toDTO(x))
+                .map(x -> mapper.toDTO(x))
                 .collect(Collectors.toList());
     }
 
     @Override
     public void saveTask(TaskDTO dto) {
-        taskRepository.save(toTask(dto));
+        taskRepository.save(mapper.toTask(dto));
     }
 
     @Override
     public boolean deleteTask(int id) {
-        if (taskRepository.getOne(id) != null){
-            taskRepository.delete(taskRepository.getOne(id));
-            return true;
-        }
-        return false;
+        Task task =  taskRepository.findById(id).orElseThrow(()->new TaskException("Problem with task searching"));
+        taskRepository.delete(task);
+        return true;
     }
 
-    public static Task toTask(TaskDTO dto){
-        return Task.builder()
-                .id(dto.getId())
-                .deadline(dto.getDeadline())
-                .points(dto.getPoints())
-                .priority(dto.getPriority())
-                .state(dto.getState())
-                .taskContent(dto.getTaskContent())
-                .build();
-    }
-
-    public static TaskDTO toDTO(Task task){
-        return TaskDTO.builder()
-                .id(task.getId())
-                .deadline(task.getDeadline())
-                .points(task.getPoints())
-                .priority(task.getPriority())
-                .state(task.getState())
-                .taskContent(task.getTaskContent())
-                .build();
-    }
 
 }
