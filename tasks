@@ -1,5 +1,15 @@
 1. Fix TaskService(Mapper) - done
 2. Test TaskService - done
-3. Fix/test Module
+3. Fix - done/test Module -
 4. Fix Module Mapper - done
 5. Change getOne to findById - done
+
+
+1. Find info about annotations in TaskController
+2. Crud operations for TaskController - done
+
+
+1. Add validations to TaskDTO - done
+2. Test ModuleServiceImpl
+3. Create/test Module controller
+4. Add validations to module controller

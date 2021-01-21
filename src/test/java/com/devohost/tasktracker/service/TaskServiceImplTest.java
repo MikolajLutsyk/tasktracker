@@ -74,9 +74,8 @@ class TaskServiceImplTest {
                 .deadline(LocalDate.now())
                 .build());
         List<TaskDTO> dtoList = service.getAllTasks();
-        assertEquals("Content 2", service.getTaskById(2).getTaskContent());
-        assertEquals("Content 3", service.getTaskById(3).getTaskContent());
-        assertEquals("Content 4", service.getTaskById(4).getTaskContent());
+        assertEquals("Content 3", dtoList.get(2).getTaskContent());
+        assertEquals("Content 4", dtoList.get(3).getTaskContent());
     }
 
     @Test

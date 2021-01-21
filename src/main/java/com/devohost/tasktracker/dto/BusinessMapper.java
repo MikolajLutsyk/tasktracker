@@ -40,19 +40,21 @@ public class BusinessMapper {
     public Module toModule(ModuleDTO dto){
         return Module.builder()
                 .id(dto.getId())
+                .name(dto.getName())
                 .moduleTasks(dto.getModuleTasks().stream()
-                        .map(x->toTask(x))
+                        .map(this::toTask)
                         .collect(Collectors.toList()))
-                .state(dto.getState())
+                .state(State.valueOf(dto.getState()))
                 .build();
     }
 
     public ModuleDTO toDTO(Module module){
         return ModuleDTO.builder()
                 .id(module.getId())
-                .state(module.getState())
+                .name(module.getName())
+                .state(module.getState().toString())
                 .moduleTasks(module.getModuleTasks().stream()
-                        .map(x->toDTO(x))
+                        .map(this::toDTO)
                         .collect(Collectors.toList()))
                 .build();
     }

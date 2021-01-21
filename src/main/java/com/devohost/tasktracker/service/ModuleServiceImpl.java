@@ -6,30 +6,33 @@ import com.devohost.tasktracker.entities.Module;
 import com.devohost.tasktracker.entities.enums.State;
 import com.devohost.tasktracker.exceptions.ModuleException;
 import com.devohost.tasktracker.repositories.ModuleRepository;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ModuleSersiceImpl implements ModuleService{
+@Service
+public class ModuleServiceImpl implements ModuleService{
 
     @Resource
-    ModuleRepository moduleRepository;
+    private ModuleRepository moduleRepository;
     @Resource
-    BusinessMapper mapper;
+    private BusinessMapper mapper;
 
     @Override
     public ModuleDTO addModule(ModuleDTO dto) {
         if(dto == null){
             throw new ModuleException("income module object is null");
         }
-        dto.setState(State.NEW);
+        dto.setState(State.NEW.toString());
         Module module = moduleRepository.save(mapper.toModule(dto));
         return mapper.toDTO(module);
     }
 
     @Override
     public ModuleDTO getModuleById(int id) throws ModuleException {
-        return mapper.toDTO(moduleRepository.getOne(id));
+        return mapper.toDTO(moduleRepository.findById(id).orElseThrow(() -> new ModuleException("can't find")));
     }
 
     @Override
