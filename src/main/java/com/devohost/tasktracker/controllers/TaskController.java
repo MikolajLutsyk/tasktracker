@@ -48,7 +48,7 @@ public class TaskController {
     }
 
     @PutMapping("/update")
-    public void saveTask(@RequestBody @Valid TaskDTO dto){
+    public void updateTask(@RequestBody @Valid TaskDTO dto){
             taskService.saveTask(dto);
     }
 

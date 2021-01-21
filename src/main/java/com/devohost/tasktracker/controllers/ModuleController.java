@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -31,9 +32,19 @@ public class ModuleController {
         return moduleService.getModuleById(Integer.parseInt(id));
     }
 
+    @GetMapping("/getall")
+    public List<ModuleDTO> getAllModules(){
+        return moduleService.getAllModules();
+    }
+
     @DeleteMapping("/delete/{id}")
     public boolean deleteModule(@PathVariable(name = "id") String id){
         return moduleService.deleteModule(Integer.parseInt(id));
+    }
+
+    @PutMapping("/update")
+    public void updateModule(@RequestBody @Valid ModuleDTO moduleDTO){
+        moduleService.saveModule(moduleDTO);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
