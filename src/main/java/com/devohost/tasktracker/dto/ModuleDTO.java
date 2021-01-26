@@ -1,5 +1,6 @@
 package com.devohost.tasktracker.dto;
 
+import com.devohost.tasktracker.entities.Task;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -17,6 +18,11 @@ public class ModuleDTO {
     @NotBlank(message = "name must not be blank")
     @NotNull(message = "name must not be null")
     private String name;
-    @Singular
+ 
     private List<TaskDTO> moduleTasks = new ArrayList<>();
+
+    public void addTask(TaskDTO task) {
+        System.out.println(moduleTasks);
+        moduleTasks.add(task);
+    }
 }

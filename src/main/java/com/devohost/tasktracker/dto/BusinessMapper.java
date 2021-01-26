@@ -1,11 +1,11 @@
 package com.devohost.tasktracker.dto;
 
 import com.devohost.tasktracker.entities.Module;
+import com.devohost.tasktracker.entities.ProjectPhase;
 import com.devohost.tasktracker.entities.Task;
 import com.devohost.tasktracker.entities.enums.State;
 import com.devohost.tasktracker.entities.enums.TaskPriority;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,4 +58,15 @@ public class BusinessMapper {
                         .collect(Collectors.toList()))
                 .build();
     }
+
+    //ProjectPhase entity/DTO mappers
+
+//    public ProjectPhase toProjectPhase(ProjectPhaseDTO dto){
+//        return ProjectPhase.builder()
+//                .id(dto.getId())
+//                .state(dto.getState())
+//                .name(dto.getName())
+//                .number()
+//
+//    }
 }

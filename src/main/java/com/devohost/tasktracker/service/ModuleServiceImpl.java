@@ -7,7 +7,6 @@ import com.devohost.tasktracker.entities.enums.State;
 import com.devohost.tasktracker.exceptions.ModuleException;
 import com.devohost.tasktracker.repositories.ModuleRepository;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
