@@ -61,12 +61,35 @@ public class BusinessMapper {
 
     //ProjectPhase entity/DTO mappers
 
-//    public ProjectPhase toProjectPhase(ProjectPhaseDTO dto){
-//        return ProjectPhase.builder()
-//                .id(dto.getId())
-//                .state(dto.getState())
-//                .name(dto.getName())
-//                .number()
-//
-//    }
+    public ProjectPhase toProjectPhase(ProjectPhaseDTO dto){
+        return ProjectPhase.builder()
+                .id(dto.getId())
+                .state(dto.getState())
+                .name(dto.getName())
+                .number(dto.getNumber())
+                .startDate(dto.getStartDate())
+                .deadline(dto.getDeadline())
+                .closeDate(dto.getCloseDate())
+                .modules(dto.getModules().stream()
+                        .map(this::toModule)
+                        .collect(Collectors.toList()))
+                .stateHistory(dto.getStateHistory())
+                .build();
+    }
+
+    public ProjectPhaseDTO toDTO(ProjectPhase projectPhase){
+        return ProjectPhaseDTO.builder()
+                .id(projectPhase.getId())
+                .state(projectPhase.getState())
+                .name(projectPhase.getName())
+                .number(projectPhase.getNumber())
+                .startDate(projectPhase.getStartDate())
+                .deadline(projectPhase.getDeadline())
+                .closeDate(projectPhase.getCloseDate())
+                .modules(projectPhase.getModules().stream()
+                            .map(this::toDTO)
+                            .collect(Collectors.toList()))
+                .stateHistory(projectPhase.getStateHistory())
+                .build();
+    }
 }

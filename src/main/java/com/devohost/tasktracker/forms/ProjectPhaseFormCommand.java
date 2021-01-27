@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.PositiveOrZero;
 
 @Data
 @AllArgsConstructor
@@ -17,4 +18,6 @@ public class ProjectPhaseFormCommand {
     private String name;
     @Pattern(regexp = "\\d{2}\\.\\d{2}\\.\\d{4}", message = "wrong date format (dd.mm.yyyy)")
     private String deadline;
+    @PositiveOrZero
+    private int number;
 }

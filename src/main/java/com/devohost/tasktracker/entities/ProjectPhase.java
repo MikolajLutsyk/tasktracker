@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,9 +30,9 @@ public class ProjectPhase {
     private LocalDate startDate;
     private LocalDate deadline;
     private LocalDate closeDate;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Module> modules;
-    @ElementCollection
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Module> modules = new ArrayList<>();
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "state_history")
     private Map<LocalDateTime, State > stateHistory;
 

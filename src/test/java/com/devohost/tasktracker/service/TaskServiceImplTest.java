@@ -32,8 +32,6 @@ class TaskServiceImplTest {
        TaskDTO returnedDto =  service.addTask(dto);
         //System.out.println(returnedDto);
         assertEquals(1, returnedDto.getId());
-
-
     }
 
     @Test

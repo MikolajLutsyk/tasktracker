@@ -1,13 +1,12 @@
 package com.devohost.tasktracker.dto;
 
-import com.devohost.tasktracker.entities.Module;
 import com.devohost.tasktracker.entities.enums.State;
 import lombok.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +17,8 @@ import java.util.Map;
 public class ProjectPhaseDTO {
     private int id;
     private State state;
+    @Positive
+    @NotNull
     private int number;
     @NotNull(message = "Name can not be null")
     @NotBlank(message = "Name can not be blank")
@@ -25,14 +26,13 @@ public class ProjectPhaseDTO {
     private LocalDate startDate;
     @NotNull(message = "Deadline can not be null")
     @NotBlank(message = "Deadline can not be blank")
-    @Pattern(regexp = "\\d{2}\\.\\d{2}\\.\\d{4}", message = "wrong date format (dd.mm.yyyy)")
     private LocalDate deadline;
     private LocalDate closeDate;
-    private List<Module> modules;
+    private List<ModuleDTO> modules = new ArrayList<>();
 
     private Map<LocalDateTime, State > stateHistory;
 
-    public void addModule(Module module){
+    public void addModule(ModuleDTO module){
         modules.add(module);
     }
 }
