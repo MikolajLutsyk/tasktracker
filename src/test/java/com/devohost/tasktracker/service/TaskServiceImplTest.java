@@ -7,12 +7,9 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import javax.annotation.Resource;
-
 import java.time.LocalDate;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -30,7 +27,6 @@ class TaskServiceImplTest {
                 .deadline(LocalDate.now())
                 .build();
        TaskDTO returnedDto =  service.addTask(dto);
-        //System.out.println(returnedDto);
         assertEquals(1, returnedDto.getId());
     }
 

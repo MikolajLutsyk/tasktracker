@@ -8,7 +8,6 @@ import com.devohost.tasktracker.exceptions.ModuleException;
 import com.devohost.tasktracker.exceptions.ProjectPhaseException;
 import com.devohost.tasktracker.repositories.ProjectPhaseRepository;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.util.List;
@@ -48,6 +47,9 @@ public class ProjectPhaseServiceImpl implements ProjectPhaseService{
 
     @Override
     public void saveProjectPhase(ProjectPhaseDTO dto) {
+        if (!dto.getState().equals(projectPhaseRepository.getOne(dto.getId()).getState())){
+            dto.stateHistoryPut(LocalDate.now(), dto.getState());
+        }
         projectPhaseRepository.save(mapper.toProjectPhase(dto));
     }
 

@@ -25,12 +25,15 @@ public class ProjectPhaseDTO {
     private String name;
     private LocalDate startDate;
     @NotNull(message = "Deadline can not be null")
-    @NotBlank(message = "Deadline can not be blank")
     private LocalDate deadline;
     private LocalDate closeDate;
     private List<ModuleDTO> modules = new ArrayList<>();
 
-    private Map<LocalDateTime, State > stateHistory;
+    private Map<LocalDate, State> stateHistory;
+
+    public void stateHistoryPut(LocalDate date, State state){
+        stateHistory.put(date, state);
+    }
 
     public void addModule(ModuleDTO module){
         modules.add(module);

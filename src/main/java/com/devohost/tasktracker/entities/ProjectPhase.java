@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,9 +32,13 @@ public class ProjectPhase {
     private List<Module> modules = new ArrayList<>();
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "state_history")
-    private Map<LocalDateTime, State > stateHistory;
+    private Map<LocalDate, State > stateHistory;
 
     public void addModule(Module module){
         modules.add(module);
+    }
+
+    public void stateHistoryPut(LocalDate date, State state){
+        stateHistory.put(date, state);
     }
 }
