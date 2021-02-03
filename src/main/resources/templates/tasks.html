@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="/html/css/bootstrap.css" rel="stylesheet">
-    <script src = "/html/js/bootstrap.bundle.js"></script>
+    <script src="/html/js/bootstrap.bundle.js"></script>
 
 </head>
 <body>
@@ -15,11 +15,16 @@
 <div class="container-xl w-50 mt-5">
     <div class="card">
         <div class="card-header text-white bg-secondary row m-0">
-            <div class="col-10">
-                <h1 class="display-6">Manage  <strong>Tasks</strong></h1>
+            <div class="col-7">
+                <h1 class="display-6">Manage <strong>Tasks</strong></h1>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-dark mt-2 ms-4">Delete Phase</button>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-success mt-2 ms-4" data-bs-toggle="modal" data-bs-target="#taskAddModal">Add Task</button>
+                <button type="button" class="btn btn-success mt-2 ms-4" data-bs-toggle="modal"
+                        data-bs-target="#taskAddModal">Add Task
+                </button>
             </div>
         </div>
         <div class="card-body">
@@ -32,24 +37,18 @@
                     <th scope="col">DeadLine</th>
                     <th scope="col">State</th>
                     <th scope="col">Priority</th>
+                    <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                <tr th:each="task : ${allTasks}">
+                    <td><span th:text="${task.getId()}"></span></td>
+                    <td><span th:text="${task.getTaskContent()}"></span></td>
+                    <td><span th:text="${task.getPoints()}"></span></td>
+                    <td><span th:text="${task.getDeadline()}"></span></td>
+                    <td><span th:text="${task.getState()}"></span></td>
+                    <td><span th:text="${task.getPriority()}"></span></td>
+                    <td><a th:href="@{/task/delete/{id}(id=${task.getId()})}" class="btn btn-danger">DELETE</a></td>
                 </tr>
                 </tbody>
             </table>
@@ -66,23 +65,26 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" th:action="@{/task/add}" th:object="${taskForm}">
+                <form method="post" th:action="@{/task/create}" th:object="${taskForm}">
 
                     <div class="mb-3">
                         <label for="taskContent" class="form-label">Task</label>
-                        <input type="text" class="form-control" id="taskContent" aria-describedby="taskContentHelp " name="taskContent" th:field="*{taskContent}">
+                        <input type="text" class="form-control" id="taskContent" aria-describedby="taskContentHelp "
+                               name="taskContent" th:field="*{taskContent}">
                         <div id="taskContentHelp" class="form-text">Enter task content</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="taskPoints" class="form-label">Points</label>
-                        <input type="number" class="form-control" id="taskPoints" aria-describedby="taskPointsHelp"  name="points" th:field="*{points}">
+                        <input type="number" class="form-control" id="taskPoints" aria-describedby="taskPointsHelp"
+                               name="points" th:field="*{points}">
                         <div id="taskPointsHelp" class="form-text">Enter task points</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="taskDeadLine" class="form-label">Due Date</label>
-                        <input type="text" class="form-control" id="taskDeadLine" aria-describedby="taskDeadLineHelp"  name="deadline" th:field="*{deadline}">
+                        <input type="date" class="form-control" id="taskDeadLine" aria-describedby="taskDeadLineHelp"
+                               name="deadline" th:field="*{deadline}">
                         <div id="taskDeadLineHelp" class="form-text">Enter task due date</div>
                     </div>
 

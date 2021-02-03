@@ -1,9 +1,10 @@
-package com.devohost.tasktracker.controllers;
+package com.devohost.tasktracker.angular_controllers;
 
 import com.devohost.tasktracker.dto.TaskDTO;
 import com.devohost.tasktracker.forms.TaskFormCommand;
 import com.devohost.tasktracker.service.TaskService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class TaskController {
     private TaskService taskService;
     private String dateFormat = "dd.MM.yyyy";
 
-    @PostMapping("/add")
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public TaskDTO addTask (@RequestBody @Valid TaskFormCommand taskFormCommand) {
         return taskService.addTask(
                 TaskDTO.builder()

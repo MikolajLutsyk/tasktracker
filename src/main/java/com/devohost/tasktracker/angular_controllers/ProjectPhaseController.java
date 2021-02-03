@@ -1,4 +1,4 @@
-package com.devohost.tasktracker.controllers;
+package com.devohost.tasktracker.angular_controllers;
 
 import com.devohost.tasktracker.dto.ModuleDTO;
 import com.devohost.tasktracker.dto.ProjectPhaseDTO;
