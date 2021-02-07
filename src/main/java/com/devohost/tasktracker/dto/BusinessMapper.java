@@ -1,11 +1,13 @@
 package com.devohost.tasktracker.dto;
 
+import com.devohost.tasktracker.entities.*;
 import com.devohost.tasktracker.entities.Module;
-import com.devohost.tasktracker.entities.ProjectPhase;
-import com.devohost.tasktracker.entities.Task;
 import com.devohost.tasktracker.entities.enums.State;
 import com.devohost.tasktracker.entities.enums.TaskPriority;
+import org.hibernate.mapping.Set;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -13,7 +15,7 @@ public class BusinessMapper {
 
     //Task entity/DTO mappers
 
-    public Task toTask(TaskDTO dto){
+    public Task toTask(TaskDTO dto) {
         return Task.builder()
                 .id(dto.getId())
                 .deadline(dto.getDeadline())
@@ -24,7 +26,7 @@ public class BusinessMapper {
                 .build();
     }
 
-    public TaskDTO toDTO(Task task){
+    public TaskDTO toDTO(Task task) {
         return TaskDTO.builder()
                 .id(task.getId())
                 .deadline(task.getDeadline())
@@ -37,7 +39,7 @@ public class BusinessMapper {
 
     //Module entity/DTO mappers
 
-    public Module toModule(ModuleDTO dto){
+    public Module toModule(ModuleDTO dto) {
         return Module.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -48,7 +50,7 @@ public class BusinessMapper {
                 .build();
     }
 
-    public ModuleDTO toDTO(Module module){
+    public ModuleDTO toDTO(Module module) {
         return ModuleDTO.builder()
                 .id(module.getId())
                 .name(module.getName())
@@ -61,7 +63,7 @@ public class BusinessMapper {
 
     //ProjectPhase entity/DTO mappers
 
-    public ProjectPhase toProjectPhase(ProjectPhaseDTO dto){
+    public ProjectPhase toProjectPhase(ProjectPhaseDTO dto) {
         return ProjectPhase.builder()
                 .id(dto.getId())
                 .state(dto.getState())
@@ -77,7 +79,7 @@ public class BusinessMapper {
                 .build();
     }
 
-    public ProjectPhaseDTO toDTO(ProjectPhase projectPhase){
+    public ProjectPhaseDTO toDTO(ProjectPhase projectPhase) {
         return ProjectPhaseDTO.builder()
                 .id(projectPhase.getId())
                 .state(projectPhase.getState())
@@ -87,9 +89,101 @@ public class BusinessMapper {
                 .deadline(projectPhase.getDeadline())
                 .closeDate(projectPhase.getCloseDate())
                 .modules(projectPhase.getModules().stream()
-                            .map(this::toDTO)
-                            .collect(Collectors.toList()))
+                        .map(this::toDTO)
+                        .collect(Collectors.toList()))
                 .stateHistory(projectPhase.getStateHistory())
+                .build();
+    }
+
+    //Project entity/DTO mappers
+
+    public Project toProject(ProjectDTO dto) {
+        return Project.builder()
+                .id(dto.getId())
+                .state(dto.getState())
+                .name(dto.getName())
+                .startDate(dto.getStartDate())
+                .deadline(dto.getDeadline())
+                .closeDate(dto.getCloseDate())
+                .projectPhases(dto.getProjectPhases().stream()
+                        .map(this::toProjectPhase)
+                        .collect(Collectors.toList()))
+                .participants(dto.getParticipants()
+                        .entrySet()
+                        .stream()
+                        .map((entry) -> Map.entry(toUser(entry.getKey()), entry.getValue() ))
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue )))
+                .build();
+    }
+
+    public ProjectDTO toDTO(Project project) {
+        return ProjectDTO.builder()
+                .id(project.getId())
+                .state(project.getState())
+                .name(project.getName())
+                .startDate(project.getStartDate())
+                .deadline(project.getDeadline())
+                .closeDate(project.getCloseDate())
+                .projectPhases(project.getProjectPhases().stream()
+                        .map(this::toDTO)
+                        .collect(Collectors.toList()))
+                .participants(project.getParticipants().entrySet().stream()
+                        .map((entry) -> Map.entry(toDTO(entry.getKey()), entry.getValue()))
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)))
+                .build();
+    }
+
+    //User entity/DTO mappers
+
+    public User toUser(UserDTO dto) {
+        return User.builder()
+                .id(dto.getId())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .firstname(dto.getFirstname())
+                .lastname(dto.getLastname())
+                .registrationDate(dto.getRegistrationDate())
+                .tracker(toTracker(dto.getTracker()))
+                .role(dto.getRole())
+                .build();
+    }
+
+    public UserDTO toDTO(User user) {
+        return UserDTO.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
+                .registrationDate(user.getRegistrationDate())
+                .tracker(toDTO(user.getTracker()))
+                .role(user.getRole())
+                .build();
+    }
+
+    //Tracker entity/DTO mappers
+
+    public Tracker toTracker(TrackerDTO dto) {
+        return Tracker.builder()
+                .id(dto.getId())
+                .userProjects(dto.getUserProjects().stream()
+                        .map(this::toProject)
+                        .collect(Collectors.toSet()))
+                .userTasks(dto.getUserTasks().stream()
+                        .map(this::toTask)
+                        .collect(Collectors.toList()))
+                .build();
+    }
+
+    public TrackerDTO toDTO(Tracker tracker) {
+        return TrackerDTO.builder()
+                .id(tracker.getId())
+                .userProjects(tracker.getUserProjects().stream()
+                        .map(this::toDTO)
+                        .collect(Collectors.toList()))
+                .userTasks(tracker.getUserTasks().stream()
+                        .map(this::toDTO)
+                        .collect(Collectors.toList()))
                 .build();
     }
 }

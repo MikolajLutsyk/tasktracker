@@ -1,4 +1,4 @@
-package com.devohost.tasktracker.service;
+package com.devohost.tasktracker.service.implementations;
 
 import com.devohost.tasktracker.dto.BusinessMapper;
 import com.devohost.tasktracker.dto.TaskDTO;
@@ -7,13 +7,14 @@ import com.devohost.tasktracker.entities.enums.State;
 import com.devohost.tasktracker.entities.enums.TaskPriority;
 import com.devohost.tasktracker.exceptions.TaskException;
 import com.devohost.tasktracker.repositories.TaskRepository;
+import com.devohost.tasktracker.service.interfaces.TaskService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TaskServiceImpl implements TaskService{
+public class TaskServiceImpl implements TaskService {
 
     @Resource
     private TaskRepository taskRepository;

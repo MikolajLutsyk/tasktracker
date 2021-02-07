@@ -2,7 +2,7 @@ package com.devohost.tasktracker.angular_controllers;
 
 import com.devohost.tasktracker.dto.TaskDTO;
 import com.devohost.tasktracker.forms.TaskFormCommand;
-import com.devohost.tasktracker.service.TaskService;
+import com.devohost.tasktracker.service.interfaces.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.FieldError;

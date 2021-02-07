@@ -15,11 +15,8 @@
 <div class="container-xl w-50 mt-5">
     <div class="card">
         <div class="card-header text-white bg-secondary row m-0">
-            <div class="col-7">
+            <div class="col-10">
                 <h1 class="display-6">Manage <strong>Tasks</strong></h1>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-dark mt-2 ms-4">Delete Phase</button>
             </div>
             <div class="col-2">
                 <button type="button" class="btn btn-success mt-2 ms-4" data-bs-toggle="modal"
@@ -48,6 +45,7 @@
                     <td><span th:text="${task.getDeadline()}"></span></td>
                     <td><span th:text="${task.getState()}"></span></td>
                     <td><span th:text="${task.getPriority()}"></span></td>
+                    <td><a class="btn btn-info">EDIT</a></td>
                     <td><a th:href="@{/task/delete/{id}(id=${task.getId()})}" class="btn btn-danger">DELETE</a></td>
                 </tr>
                 </tbody>

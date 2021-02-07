@@ -2,7 +2,7 @@ package com.devohost.tasktracker.thymeleaf_controllers;
 
 import com.devohost.tasktracker.dto.TaskDTO;
 import com.devohost.tasktracker.forms.TaskFormCommand;
-import com.devohost.tasktracker.service.TaskService;
+import com.devohost.tasktracker.service.interfaces.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;

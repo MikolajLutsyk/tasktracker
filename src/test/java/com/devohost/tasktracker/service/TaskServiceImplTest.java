@@ -2,6 +2,7 @@ package com.devohost.tasktracker.service;
 
 import com.devohost.tasktracker.dto.TaskDTO;
 import com.devohost.tasktracker.exceptions.TaskException;
+import com.devohost.tasktracker.service.interfaces.TaskService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

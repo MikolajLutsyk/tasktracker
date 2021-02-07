@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Entity(name = "ProjectPhase")
+@Entity(name = "projectPhase")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,7 +31,7 @@ public class ProjectPhase {
     private List<Module> modules = new ArrayList<>();
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "state_history")
-    private Map<LocalDate, State > stateHistory;
+    private Map<LocalDate, State> stateHistory;
 
     public void addModule(Module module){
         modules.add(module);

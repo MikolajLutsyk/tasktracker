@@ -1,4 +1,4 @@
-package com.devohost.tasktracker.service;
+package com.devohost.tasktracker.service.implementations;
 
 import com.devohost.tasktracker.dto.BusinessMapper;
 import com.devohost.tasktracker.dto.ProjectPhaseDTO;
@@ -7,6 +7,7 @@ import com.devohost.tasktracker.entities.enums.State;
 import com.devohost.tasktracker.exceptions.ModuleException;
 import com.devohost.tasktracker.exceptions.ProjectPhaseException;
 import com.devohost.tasktracker.repositories.ProjectPhaseRepository;
+import com.devohost.tasktracker.service.interfaces.ProjectPhaseService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ProjectPhaseServiceImpl implements ProjectPhaseService{
+public class ProjectPhaseServiceImpl implements ProjectPhaseService {
 
     @Resource
     private ProjectPhaseRepository projectPhaseRepository;
@@ -47,7 +48,7 @@ public class ProjectPhaseServiceImpl implements ProjectPhaseService{
 
     @Override
     public void saveProjectPhase(ProjectPhaseDTO dto) {
-        if (!dto.getState().equals(projectPhaseRepository.getOne(dto.getId()).getState())){
+        if (!dto.getState().equals(projectPhaseRepository.findById(dto.getId()).get().getState())){
             dto.stateHistoryPut(LocalDate.now(), dto.getState());
         }
         projectPhaseRepository.save(mapper.toProjectPhase(dto));

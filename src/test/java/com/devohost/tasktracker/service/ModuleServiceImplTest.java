@@ -3,6 +3,7 @@ package com.devohost.tasktracker.service;
 import com.devohost.tasktracker.dto.ModuleDTO;
 import com.devohost.tasktracker.entities.enums.State;
 import com.devohost.tasktracker.exceptions.ModuleException;
+import com.devohost.tasktracker.service.interfaces.ModuleService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

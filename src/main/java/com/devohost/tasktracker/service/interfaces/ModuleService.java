@@ -1,4 +1,4 @@
-package com.devohost.tasktracker.service;
+package com.devohost.tasktracker.service.interfaces;
 
 import com.devohost.tasktracker.dto.ModuleDTO;
 import com.devohost.tasktracker.exceptions.ModuleException;
