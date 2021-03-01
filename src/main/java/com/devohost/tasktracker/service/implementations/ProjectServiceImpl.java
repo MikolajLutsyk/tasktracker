@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +30,8 @@ public class ProjectServiceImpl implements ProjectService {
         }
         dto.setState(State.NEW);
         dto.setStartDate(LocalDate.now());
+        dto.setParticipants(new HashMap<>());
+        dto.setProjectPhases(new ArrayList<>());
         Project project = projectRepository.save(mapper.toProject(dto));
         return mapper.toDTO(project);
     }

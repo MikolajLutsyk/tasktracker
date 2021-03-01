@@ -1,13 +1,16 @@
 package com.devohost.tasktracker;
 
+import com.devohost.tasktracker.dto.TaskDTO;
+import com.devohost.tasktracker.dto.UserDTO;
 import com.devohost.tasktracker.entities.*;
-import com.devohost.tasktracker.entities.Module;
-import com.devohost.tasktracker.entities.enums.UserRole;
 import com.devohost.tasktracker.repositories.*;
+import com.devohost.tasktracker.service.interfaces.TaskService;
+import com.devohost.tasktracker.service.interfaces.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
 
 import java.time.LocalDate;
 
@@ -19,35 +22,25 @@ public class TasktrackerApplication {
     }
 
 
-//    @Bean
-//    CommandLineRunner init(UserRepository userRepository, TrackerRepository trackerRepository, ProjectRepository projectRepository,
-//                           ProjectPhaseRepository phaseRepository, ModuleRepository moduleRepository, TaskRepository taskRepository){
-//        return args -> {
-//            User user = new User("adminemail2", "password");
-//            user.setRole(UserRole.USER);
-//            user.setRegistrationDate(LocalDate.now());
-//            userRepository.save(user);
-//            Tracker tracker = new Tracker();
-//            user.setTracker(tracker);
-//            trackerRepository.save(tracker);
-//            userRepository.save(user);
-//            Project project = new Project();
-//            tracker.addProject(project);
-//            projectRepository.save(project);
-//            trackerRepository.save(tracker);
-//            ProjectPhase projectPhase = new ProjectPhase();
-//            project.addPhase(projectPhase);
-//            project.addUser(user, UserRole.ADMIN);
-//            phaseRepository.save(projectPhase);
-//            projectRepository.save(project);
-//            Module module = new Module();
-//            projectPhase.addModule(module);
-//            moduleRepository.save(module);
-//            phaseRepository.save(projectPhase);
-//            Task task = new Task();
-//            module.addTask(task);
-//            taskRepository.save(task);
-//            moduleRepository.save(module);
-//        };
-//    }
+    @Bean
+    CommandLineRunner init(UserService userService, RoleRepository roleRepository, TrackerRepository trackerRepository, ProjectRepository projectRepository,
+                           ProjectPhaseRepository phaseRepository, ModuleRepository moduleRepository, TaskRepository taskRepository, TaskService taskService){
+        return args -> {
+
+            taskService.addTask(TaskDTO.builder().deadline(LocalDate.now().plusDays(2)).points(10).taskContent("task 1").build());
+            taskService.addTask(TaskDTO.builder().deadline(LocalDate.now().plusDays(2)).points(10).taskContent("task 2").build());
+            taskService.addTask(TaskDTO.builder().deadline(LocalDate.now().plusDays(2)).points(10).taskContent("task 3").build());
+            taskService.addTask(TaskDTO.builder().deadline(LocalDate.now().plusDays(2)).points(10).taskContent("task 4").build());
+
+            Role role = new Role(0, "ADMIN");
+            Role role2 = new Role(0, "USER");
+            Role role3 = new Role(0, "MANAGER");
+            roleRepository.save(role);
+            roleRepository.save(role2);
+            roleRepository.save(role3);
+
+            userService.addUser(UserDTO.builder().email("email@gmail.com").password("password").role(role2).build());
+
+        };
+    }
 }

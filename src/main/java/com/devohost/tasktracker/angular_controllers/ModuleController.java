@@ -33,7 +33,6 @@ public class ModuleController {
         System.out.println(moduleFormCommand.getName() + " - name");
         return moduleService.addModule(ModuleDTO.builder()
                 .name(moduleFormCommand.getName())
-                .moduleTasks(new ArrayList<>())
                 .build());
     }
 

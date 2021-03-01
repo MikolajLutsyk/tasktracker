@@ -4,14 +4,18 @@ import com.devohost.tasktracker.entities.*;
 import com.devohost.tasktracker.entities.Module;
 import com.devohost.tasktracker.entities.enums.State;
 import com.devohost.tasktracker.entities.enums.TaskPriority;
+import com.devohost.tasktracker.repositories.RoleRepository;
 import org.hibernate.mapping.Set;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class BusinessMapper {
+    @Resource
+    private RoleRepository roleRepository;
 
     //Task entity/DTO mappers
 
@@ -111,8 +115,8 @@ public class BusinessMapper {
                 .participants(dto.getParticipants()
                         .entrySet()
                         .stream()
-                        .map((entry) -> Map.entry(toUser(entry.getKey()), entry.getValue() ))
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue )))
+                        .map((entry) -> Map.entry(toUser(entry.getKey()), entry.getValue()))
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)))
                 .build();
     }
 
@@ -144,7 +148,7 @@ public class BusinessMapper {
                 .lastname(dto.getLastname())
                 .registrationDate(dto.getRegistrationDate())
                 .tracker(toTracker(dto.getTracker()))
-                .role(dto.getRole())
+                .role(toRole(dto.getRole()))
                 .build();
     }
 
@@ -157,7 +161,7 @@ public class BusinessMapper {
                 .lastname(user.getLastname())
                 .registrationDate(user.getRegistrationDate())
                 .tracker(toDTO(user.getTracker()))
-                .role(user.getRole())
+                .role(user.getRole().getName())
                 .build();
     }
 
@@ -186,4 +190,17 @@ public class BusinessMapper {
                         .collect(Collectors.toList()))
                 .build();
     }
+
+    public Role toRole(String role) {
+
+        return roleRepository.findByName(role);
+    }
+
+    public RoleDTO toDTO(Role role) {
+        return RoleDTO.builder()
+                .id(role.getId())
+                .name(role.getName())
+                .build();
+    }
+
 }

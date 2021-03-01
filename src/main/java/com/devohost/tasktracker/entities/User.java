@@ -1,7 +1,6 @@
 package com.devohost.tasktracker.entities;
 
 
-import com.devohost.tasktracker.entities.enums.UserRole;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +9,6 @@ import java.time.LocalDate;
 @Entity(name = "User")
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class User {
     @Id
@@ -24,8 +22,12 @@ public class User {
     private String firstname;
     private String lastname;
     private LocalDate registrationDate;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Tracker tracker;
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    @OneToOne
+    private Role role;
+
+    public User() {
+        Tracker tracker = new Tracker();
+    }
 }

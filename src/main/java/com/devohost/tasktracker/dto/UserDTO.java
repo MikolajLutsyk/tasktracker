@@ -1,8 +1,8 @@
 package com.devohost.tasktracker.dto;
 
-import com.devohost.tasktracker.entities.Tracker;
-import com.devohost.tasktracker.entities.enums.UserRole;
+import com.devohost.tasktracker.entities.Role;
 import lombok.*;
+
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,7 +10,6 @@ import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class UserDTO {
     private int id;
@@ -28,5 +27,9 @@ public class UserDTO {
     private String lastname;
     private LocalDate registrationDate;
     private TrackerDTO tracker;
-    private UserRole role;
+    private String role;
+
+    public UserDTO() {
+        tracker = new TrackerDTO();
+    }
 }

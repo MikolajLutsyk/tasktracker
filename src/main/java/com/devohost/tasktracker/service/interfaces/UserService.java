@@ -8,7 +8,9 @@ import java.util.List;
 public interface UserService {
     UserDTO addUser(UserDTO dto);
     UserDTO getUserById(int id) throws UserException;
+    UserDTO getUserByEmail(String email);
     List<UserDTO> getAllUsers();
     void saveUser(UserDTO dto);
     boolean deleteUser(int id);
+
 }

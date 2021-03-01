@@ -11,6 +11,7 @@ import com.devohost.tasktracker.service.interfaces.ProjectPhaseService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,7 @@ public class ProjectPhaseServiceImpl implements ProjectPhaseService {
         }
         dto.setState(State.NEW);
         dto.setStartDate(LocalDate.now());
+        dto.setModules(new ArrayList<>());
         ProjectPhase projectPhase = projectPhaseRepository.save(mapper.toProjectPhase(dto));
         return mapper.toDTO(projectPhase);
     }

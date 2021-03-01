@@ -1,16 +1,21 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Tasks</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
     <link href="/html/css/bootstrap.css" rel="stylesheet">
-    <script src="/html/js/bootstrap.bundle.js"></script>
+
+
+    <script type="text/javascript" th:src="@{/html/js/bootstrap.bundle.js}"></script>
+
 
 </head>
 <body>
+
 
 <div class="container-xl w-50 mt-5">
     <div class="card">
@@ -19,13 +24,11 @@
                 <h1 class="display-6">Manage <strong>Tasks</strong></h1>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-success mt-2 ms-4" data-bs-toggle="modal"
-                        data-bs-target="#taskAddModal">Add Task
-                </button>
+                <a th:href="@{/task/add}" type="button" class="btn btn-success mt-2 ms-4">Add Task</a>
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
+            <table class="table table-hover" id="tasks">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -45,54 +48,11 @@
                     <td><span th:text="${task.getDeadline()}"></span></td>
                     <td><span th:text="${task.getState()}"></span></td>
                     <td><span th:text="${task.getPriority()}"></span></td>
-                    <td><a class="btn btn-info">EDIT</a></td>
-                    <td><a th:href="@{/task/delete/{id}(id=${task.getId()})}" class="btn btn-danger">DELETE</a></td>
+                    <td><a th:href="@{/task/edit/{id}(id=${task.getId()})}" class="btn btn-info">EDIT</a>
+                        <a th:href="@{/task/delete/{id}(id=${task.getId()})}" class="btn btn-danger">DELETE</a></td>
                 </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="taskAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog w-75">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" th:action="@{/task/create}" th:object="${taskForm}">
-
-                    <div class="mb-3">
-                        <label for="taskContent" class="form-label">Task</label>
-                        <input type="text" class="form-control" id="taskContent" aria-describedby="taskContentHelp "
-                               name="taskContent" th:field="*{taskContent}">
-                        <div id="taskContentHelp" class="form-text">Enter task content</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="taskPoints" class="form-label">Points</label>
-                        <input type="number" class="form-control" id="taskPoints" aria-describedby="taskPointsHelp"
-                               name="points" th:field="*{points}">
-                        <div id="taskPointsHelp" class="form-text">Enter task points</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="taskDeadLine" class="form-label">Due Date</label>
-                        <input type="date" class="form-control" id="taskDeadLine" aria-describedby="taskDeadLineHelp"
-                               name="deadline" th:field="*{deadline}">
-                        <div id="taskDeadLineHelp" class="form-text">Enter task due date</div>
-                    </div>
-
-
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-
-                </form>
-            </div>
         </div>
     </div>
 </div>

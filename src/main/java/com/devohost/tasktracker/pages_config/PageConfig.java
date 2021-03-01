@@ -5,10 +5,13 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class PageConfig implements WebMvcConfigurer{
+public class PageConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/tasks").setViewName("tasks");
-        registry.addViewController("/project-phases").setViewName("project-phases");
+        registry.addViewController("/task-edit").setViewName("task-edit");
+        registry.addViewController("/task-add").setViewName("task-add");
+        registry.addViewController("/sign-up").setViewName("sign-up");
+        registry.addViewController("/sign-in").setViewName("sign-in");
     }
 }

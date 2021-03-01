@@ -3,9 +3,9 @@ package com.devohost.tasktracker.entities;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity(name = "Tracker")
 @Data
@@ -26,5 +26,10 @@ public class Tracker {
     }
     public void addUserTask(Task task){
         userTasks.add(task);
+    }
+
+    public Tracker() {
+        userProjects = new HashSet<>();
+        userTasks = new ArrayList<>();
     }
 }

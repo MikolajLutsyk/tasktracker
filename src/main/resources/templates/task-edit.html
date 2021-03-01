@@ -1,0 +1,75 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link href="/html/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/html/js/bootstrap.bundle.js}"></script>
+</head>
+<body>
+<div>
+    <div class="modal-dialog w-75">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+                <a th:href="@{/tasks}" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+            </div>
+            <div class="modal-body">
+                <form method="post" th:action="@{/api/task/update}" th:object="${someTask}">
+                    <input type="text" class="form-control" id="taskId" hidden="hidden" aria-describedby="taskContentHelp "
+                           name="id" th:field="*{id}">
+                    <div class="mb-3">
+                        <label for="taskContent" class="form-label">Task</label>
+                        <input type="text" class="form-control" id="taskContent" aria-describedby="taskContentHelp "
+                               name="taskContent" th:field="*{taskContent}">
+                        <div id="taskContentHelp" class="text-danger" th:if="${#fields.hasErrors('taskContent')}" th:errors="*{taskContent}">null</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="taskPoints" class="form-label">Points</label>
+                        <input type="number" class="form-control" id="taskPoints" aria-describedby="taskPointsHelp"
+                               name="points" th:field="*{points}">
+                        <div id="taskPointsHelp" class="text-danger" th:if="${#fields.hasErrors('points')}" th:errors="*{points}">Wrong number</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="taskDeadLine" class="form-label">Due Date</label>
+                        <input type="date" class="form-control" id="taskDeadLine" aria-describedby="taskDeadLineHelp"
+                               name="deadline" th:field="*{deadline}">
+                        <div id="taskDeadLineHelp" class="form-text">Enter task due date</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="taskState" class="form-label">Task State</label>
+                        <select th:field="*{state}" id="taskState">
+                            <option th:each="item : ${states}" th:value="${item}" th:text="${item}"
+                                    th:selected="${item}"></option>
+                        </select>
+                        <div id="taskStateHelp" class="form-text">Enter task state</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="taskPriority" class="form-label">Task Priority</label>
+                        <select th:field="*{priority}" id="taskPriority">
+                            <option th:each="item : ${priorities}" th:value="${item}" th:text="${item}"
+                                    th:selected="${item}"></option>
+                        </select>
+                        <div id="taskPriorityHelp" class="form-text">Enter task Priority</div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

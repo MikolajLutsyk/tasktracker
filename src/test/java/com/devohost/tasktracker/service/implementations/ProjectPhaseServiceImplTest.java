@@ -1,4 +1,4 @@
-package com.devohost.tasktracker.service;
+package com.devohost.tasktracker.service.implementations;
 
 import com.devohost.tasktracker.dto.ProjectPhaseDTO;
 import com.devohost.tasktracker.exceptions.ProjectPhaseException;
@@ -28,7 +28,6 @@ class ProjectPhaseServiceImplTest {
                 .number(1)
                 .name("new name")
                 .deadline(LocalDate.now())
-                .modules(new ArrayList<>())
                 .build();
         ProjectPhaseDTO returnedDTO = service.addProjectPhase(dto);
         assertEquals(1, returnedDTO.getId());
@@ -49,19 +48,16 @@ class ProjectPhaseServiceImplTest {
                 .number(2)
                 .name("new name 2")
                 .deadline(LocalDate.now())
-                .modules(new ArrayList<>())
                 .build());
         ProjectPhaseDTO dto3 = service.addProjectPhase(ProjectPhaseDTO.builder()
                 .number(3)
                 .name("new name 3")
                 .deadline(LocalDate.now())
-                .modules(new ArrayList<>())
                 .build());
         ProjectPhaseDTO dto4 = service.addProjectPhase(ProjectPhaseDTO.builder()
                 .number(4)
                 .name("new name 4")
                 .deadline(LocalDate.now())
-                .modules(new ArrayList<>())
                 .build());
         List<ProjectPhaseDTO> phaseDTOS = service.getAllProjectPhases();
 
