@@ -1,6 +1,7 @@
 package com.devohost.tasktracker.repositories;
 
 
+import com.devohost.tasktracker.dto.UserDTO;
 import com.devohost.tasktracker.entities.User;
 import com.devohost.tasktracker.entities.enums.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;

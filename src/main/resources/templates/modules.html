@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project's Phases</title>
+</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/html/css/bootstrap.css" rel="stylesheet">
+<script type="text/javascript" th:src="@{/html/js/bootstrap.bundle.js}"></script>
+</head>
+<body>
+<div class="container-xl w-50 mt-5">
+    <div class="card">
+        <div class="card-header text-white bg-secondary row m-0">
+            <div class="col-10">
+                <h1 class="display-6">Modules</h1>
+            </div>
+            <div class="col-2">
+                <a th:href="@{/phases/{projectId} (projectId=${projectId})}" type="button" class="btn btn-info mt-2 ms-4">Back to Phases</a>
+            </div>
+            <div class="col-2">
+                <a th:href="@{/module/add/{id}/{phaseId} (id=${projectId}, phaseId=${phaseId})}" type="button" class="btn btn-success mt-2 ms-4">  Add Module  </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover" id="tasks">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="phase : ${phaseModules}">
+                    <td><span th:text="${phase.getId()}"></span></td>
+                    <td><span th:text="${phase.getName()}"></span></td>
+                    <td><span th:text="${phase.getState()}"></span></td>
+                    <td>
+                        <!--<a th:href="@{/modules/{phaseId} (phaseId=${phase.getId()})}" type="button" class="btn btn-success mt-2 ms-4">MODULES</a>
+                        <a th:href="@{/phase/delete/{projId}/{phaseId} (projId=${projectId}, phaseId=${phase.getId()})}" type="button" class="btn btn-danger mt-2 ms-4">DELETE</a>-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

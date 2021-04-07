@@ -16,7 +16,7 @@ import javax.validation.constraints.PositiveOrZero;
 public class ProjectPhaseFormCommand {
     @NotBlank(message = "Name can not be empty")
     private String name;
-    @Pattern(regexp = "\\d{2}\\.\\d{2}\\.\\d{4}", message = "wrong date format (dd.mm.yyyy)")
+    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "wrong date format (dd.mm.yyyy)")
     private String deadline;
     @PositiveOrZero
     private int number;

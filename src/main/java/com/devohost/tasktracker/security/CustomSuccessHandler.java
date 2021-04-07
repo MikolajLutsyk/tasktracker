@@ -20,7 +20,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             if("ADMIN".equals(auth.getAuthority())){
                 httpServletResponse.sendRedirect("/dashboard");
             }else if ("USER".equals(auth.getAuthority())){
-                httpServletResponse.sendRedirect("/tasks");
+                httpServletResponse.sendRedirect("/projects");
             }
         }
     }

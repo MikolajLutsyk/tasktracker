@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Project Phase</title>
+    <link href="/html/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/html/js/bootstrap.bundle.js}"></script>
+</head>
+<body>
+<body>
+<div class="modal-dialog w-75">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Phase</h5>
+            <a th:href="@{/phases/{id} (id=${projectId})}" type="button" class="btn-close" data-bs-dismiss="modal"
+               aria-label="Close"></a>
+        </div>
+        <div class="modal-body">
+            <form method="post" th:action="@{/phase/add/{id} (id=${projectId})}" th:object="${phaseForm}">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" aria-describedby="nameHelp "
+                           name="name" th:field="*{name}">
+                    <div id="nameHelp" class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                        incorrect
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="deadLine" class="form-label">Due Date</label>
+                    <input type="date" class="form-control" id="deadLine" aria-describedby="deadLineHelp"
+                           name="deadline" th:field="*{deadline}">
+                    <div id="deadLineHelp" class="form-text">Enter project due date</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="number" class="form-label">Number in Order</label>
+                    <input type="number" class="form-control" id="number" aria-describedby="numberHelp"
+                           name="number" th:field="*{number}">
+                    <div id="numberHelp" class="form-text">Enter project phase's number</div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

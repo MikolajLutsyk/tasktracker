@@ -17,8 +17,8 @@ import java.time.LocalDate;
 @Builder
 public class ProjectFormCommand {
     @NotNull(message = "Deadline can not be null")
-    @Pattern(regexp = "\\d{2}\\.\\d{2}\\.\\d{4}", message = "wrong date format (dd.mm.yyyy)")
-    private LocalDate deadline;
+    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "wrong date format (dd.mm.yyyy)")
+    private String deadline;
     @NotNull(message = "name can't be null")
     @NotBlank(message = "name can't be blank")
     private String name;

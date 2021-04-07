@@ -34,10 +34,11 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ProjectPhase> projectPhases = new ArrayList<>();
 
-    public void addUser(User user, UserRole role){
+    public void addUser(User user, UserRole role) {
         participants.put(user, role);
     }
-    public void addPhase(ProjectPhase phase){
+
+    public void addPhase(ProjectPhase phase) {
         projectPhases.add(phase);
     }
 

@@ -66,7 +66,10 @@ public class HttpSecurityConfig {
                     .antMatchers("/sign-up").permitAll()
                     .antMatchers("/").permitAll()
                     .antMatchers("/sign-in").permitAll()
+                    .antMatchers("/projects").authenticated()
+                    .antMatchers("/phases").authenticated()
                     .antMatchers("/tasks").authenticated()
+                    .antMatchers("/modules").authenticated()
                     .antMatchers("/dashboard/**").hasAnyAuthority("ADMIN")
                     .anyRequest()
                     .authenticated()
@@ -85,7 +88,7 @@ public class HttpSecurityConfig {
                     .permitAll()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .deleteCookies("JSESSIONID")
-                    .logoutSuccessUrl("/")
+                    .logoutSuccessUrl("/sign-in")
                     .and()
                     .exceptionHandling();
         }

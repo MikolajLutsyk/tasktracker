@@ -16,8 +16,8 @@
 <div class="modal-dialog w-75">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+            <a th:href="@{/sign-in}" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
         </div>
         <div class="modal-body">
             <form method="post" th:action="@{/sign-up}" th:object="${userForm}">
